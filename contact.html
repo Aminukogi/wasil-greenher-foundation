@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Wasil GreenHer Foundation</title>
+  <meta name="description" content="Get in touch with Wasil GreenHer Foundation for enquiries, partnerships, media and volunteering.">
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Wasil GreenHer Foundation logo">
+      <span class="brand-name">
+        <span class="top">Wasil <em>GreenHer</em></span>
+        <span class="sub">Foundation</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="programmes.html">Programmes</a>
+      <a href="insight.html">Insight</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="kicker">Contact Us</span>
+      <h1>We'd Love to Hear From You</h1>
+      <p>Questions, partnership ideas, media enquiries or volunteering. Reach out and we'll respond as soon as we can.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="display:grid; grid-template-columns: 0.9fr 1.1fr; gap:48px; align-items:start;">
+      <div>
+        <span class="kicker">Reach Us</span>
+        <h2 style="margin-bottom:26px;">Contact details</h2>
+
+        <div class="contact-item">
+          <div class="icon-bubble">📍</div>
+          <div>
+            <h4>Locations</h4>
+            <p>Abuja (FCT), Nigeria</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon-bubble">✉️</div>
+          <div>
+            <h4>Email</h4>
+            <p><a href="mailto:info@wasilgreenher.org">info@wasilgreenher.org</a><br><span style="font-size:0.85rem; color:var(--ink-soft);">(update this to your official address)</span></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon-bubble">📞</div>
+          <div>
+            <h4>Phone / WhatsApp</h4>
+            <p><a href="tel:+2349072970381">0907 297 0381</a></p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon-bubble">🌐</div>
+          <div>
+            <h4>Social Media</h4>
+            <p>Follow us on Facebook, Instagram, X and LinkedIn (links in the footer).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3 style="margin-bottom:18px;">Send us a message</h3>
+        <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-demo><input type="hidden" name="form-name" value="contact"><p hidden><label>Skip: <input name="bot-field"></label></p>
+          <div class="form-grid">
+            <div class="field">
+              <label for="c-name">Full Name <span class="req">*</span></label>
+              <input type="text" id="c-name" name="name" required>
+            </div>
+            <div class="field">
+              <label for="c-email">Email Address <span class="req">*</span></label>
+              <input type="email" id="c-email" name="email" required>
+            </div>
+            <div class="field full">
+              <label for="c-subject">Subject <span class="req">*</span></label>
+              <select id="c-subject" name="subject" required>
+                <option value="">Select…</option>
+                <option>General enquiry</option>
+                <option>Partnership</option>
+                <option>Volunteering</option>
+                <option>Donations &amp; support</option>
+                <option>Media / press</option>
+                <option>Safeguarding concern</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="c-msg">Message <span class="req">*</span></label>
+              <textarea id="c-msg" name="message" required></textarea>
+            </div>
+            <div class="field full checkbox-row">
+              <input type="checkbox" id="c-consent" required>
+              <label for="c-consent">I consent to my data being used to respond to this enquiry, in line with the <a href="privacy.html">Privacy Policy</a>. <span class="req">*</span></label>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit" style="margin-top:20px;">Send Message</button>
+          <div class="form-success">Message received, thank you! We'll get back to you shortly. 🌱</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Wasil GreenHer Foundation logo">
+        <p>Empowering girls, young people and vulnerable communities through education, health, climate action and community-driven initiatives.</p>
+        <p class="footer-contact">Abuja (FCT), Nigeria · <a href="mailto:info@wasilgreenher.org">info@wasilgreenher.org</a> · <a href="tel:+2349072970381">0907 297 0381</a></p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">◎</a>
+          <a href="#" aria-label="X (Twitter)">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programmes.html">Programmes</a></li>
+          <li><a href="insight.html">Insight</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Involved</h4>
+        <ul class="footer-links">
+          <li><a href="volunteer.html">Volunteer</a></li>
+          <li><a href="partner.html">Partner With Us</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="transparency.html">Transparency</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <p style="font-size:0.93rem;">Get updates on our programmes, events and impact.</p>
+        <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-demo><input type="hidden" name="form-name" value="newsletter"><p hidden><label>Skip: <input name="bot-field"></label></p>
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+          <button class="btn btn-accent" type="submit">Join</button>
+          <div class="form-success">Thank you for subscribing! 🌱</div>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> Wasil GreenHer Foundation. All rights reserved.</span>
+      <span><a href="privacy.html">Privacy &amp; Safeguarding</a> · Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<style>
+@media (max-width: 860px) {
+  main .container[style*="grid-template-columns"] { display: block !important; }
+  main .form-card { margin-top: 40px; }
+}
+</style>
+</body>
+</html>

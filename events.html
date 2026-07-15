@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events | Wasil GreenHer Foundation</title>
+  <meta name="description" content="Upcoming events, outreaches and programmes by Wasil GreenHer Foundation, with online registration.">
+  <link rel="icon" href="images/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html">
+      <img src="images/logo.png" alt="Wasil GreenHer Foundation logo">
+      <span class="brand-name">
+        <span class="top">Wasil <em>GreenHer</em></span>
+        <span class="sub">Foundation</span>
+      </span>
+    </a>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">☰</button>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About Us</a>
+      <a href="programmes.html">Programmes</a>
+      <a href="insight.html">Insight</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container">
+      <span class="kicker">Events Calendar</span>
+      <h1>Upcoming Events</h1>
+      <p>Join an outreach, workshop or campaign. Register online below. Participation is free unless stated otherwise.</p>
+      <nav class="subnav" aria-label="Programmes section">
+        <a href="programmes.html">Programmes</a>
+        <a class="active" href="events.html">Events</a>
+      </nav>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="max-width:900px;">
+      <!-- Sample events: replace with your real events by duplicating a block.
+           If Sanity Studio is connected, events added there replace this list automatically. -->
+      <div id="events-list" style="display:flex; flex-direction:column; gap:22px;">
+      <div class="card event-card">
+        <div class="event-date"><div class="day">–</div><div class="month">TBA</div></div>
+        <div>
+          <span class="badge green">School Outreach</span>
+          <h3>SDG Sensitization: Schools Tour</h3>
+          <p class="event-meta">📍 Nigeria · 🕘 Date to be announced</p>
+          <p>Interactive SDG education sessions for pupils, with a spotlight on SDG 13 Climate Action. Teachers and volunteers welcome.</p>
+          <a class="btn btn-outline" href="#register" style="margin-top:14px;">Register Interest</a>
+        </div>
+      </div>
+
+      <div class="card event-card">
+        <div class="event-date"><div class="day">–</div><div class="month">TBA</div></div>
+        <div>
+          <span class="badge">Workshop</span>
+          <h3>Girls' Leadership &amp; Mentorship Circle</h3>
+          <p class="event-meta">📍 Nigeria · 🕘 Date to be announced</p>
+          <p>A mentorship and confidence-building session for secondary school girls, led by women professionals.</p>
+          <a class="btn btn-outline" href="#register" style="margin-top:14px;">Register Interest</a>
+        </div>
+      </div>
+
+      <div class="card event-card">
+        <div class="event-date"><div class="day">–</div><div class="month">TBA</div></div>
+        <div>
+          <span class="badge green">Campaign</span>
+          <h3>Community Health &amp; Hygiene Campaign</h3>
+          <p class="event-meta">📍 Nigeria · 🕘 Date to be announced</p>
+          <p>Door-to-door and town-hall health education on hygiene, sanitation and disease prevention.</p>
+          <a class="btn btn-outline" href="#register" style="margin-top:14px;">Register Interest</a>
+        </div>
+      </div>
+
+      </div>
+
+      <p class="form-note" style="margin-top:22px;">New events are announced here and in our <a href="insight.html">newsletter</a>. Dates marked "TBA" will be confirmed soon.</p>
+    </div>
+  </section>
+
+  <!-- Registration -->
+  <section class="alt-bg" id="register">
+    <div class="container" style="max-width:820px;">
+      <div class="section-head center">
+        <span class="kicker">Online Registration</span>
+        <h2>Register for an Event</h2>
+        <p class="lede">Tell us which event you'd like to attend and we'll confirm your place by email.</p>
+      </div>
+      <div class="form-card">
+        <form name="event-registration" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-demo><input type="hidden" name="form-name" value="event-registration"><p hidden><label>Skip: <input name="bot-field"></label></p>
+          <div class="form-grid">
+            <div class="field">
+              <label for="ev-name">Full Name <span class="req">*</span></label>
+              <input type="text" id="ev-name" name="name" required>
+            </div>
+            <div class="field">
+              <label for="ev-email">Email Address <span class="req">*</span></label>
+              <input type="email" id="ev-email" name="email" required>
+            </div>
+            <div class="field">
+              <label for="ev-phone">Phone / WhatsApp</label>
+              <input type="tel" id="ev-phone" name="phone">
+            </div>
+            <div class="field">
+              <label for="ev-event">Event <span class="req">*</span></label>
+              <select id="ev-event" name="event" required>
+                <option value="">Select an event…</option>
+                <option>SDG Sensitization: Schools Tour</option>
+                <option>Girls' Leadership &amp; Mentorship Circle</option>
+                <option>Community Health &amp; Hygiene Campaign</option>
+                <option>Other / future events</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="ev-msg">Anything we should know? (accessibility needs, questions…)</label>
+              <textarea id="ev-msg" name="message"></textarea>
+            </div>
+            <div class="field full checkbox-row">
+              <input type="checkbox" id="ev-consent" required>
+              <label for="ev-consent">I consent to Wasil GreenHer Foundation contacting me about this event and storing my details in line with the <a href="privacy.html">Privacy Policy</a>. <span class="req">*</span></label>
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit" style="margin-top:20px;">Submit Registration</button>
+          <div class="form-success">Registration received! We'll confirm your place by email. 🌱</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="Wasil GreenHer Foundation logo">
+        <p>Empowering girls, young people and vulnerable communities through education, health, climate action and community-driven initiatives.</p>
+        <p class="footer-contact">Abuja (FCT), Nigeria · <a href="mailto:info@wasilgreenher.org">info@wasilgreenher.org</a> · <a href="tel:+2349072970381">0907 297 0381</a></p>
+        <div class="socials">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Instagram">◎</a>
+          <a href="#" aria-label="X (Twitter)">𝕏</a>
+          <a href="#" aria-label="LinkedIn">in</a>
+        </div>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul class="footer-links">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="programmes.html">Programmes</a></li>
+          <li><a href="insight.html">Insight</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+          <li><a href="events.html">Events</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Get Involved</h4>
+        <ul class="footer-links">
+          <li><a href="volunteer.html">Volunteer</a></li>
+          <li><a href="partner.html">Partner With Us</a></li>
+          <li><a href="donate.html">Donate</a></li>
+          <li><a href="transparency.html">Transparency</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Newsletter</h4>
+        <p style="font-size:0.93rem;">Get updates on our programmes, events and impact.</p>
+        <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" data-demo><input type="hidden" name="form-name" value="newsletter"><p hidden><label>Skip: <input name="bot-field"></label></p>
+          <input type="email" name="email" placeholder="Your email address" required aria-label="Email address">
+          <button class="btn btn-accent" type="submit">Join</button>
+          <div class="form-success">Thank you for subscribing! 🌱</div>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span class="year">2026</span> Wasil GreenHer Foundation. All rights reserved.</span>
+      <span><a href="privacy.html">Privacy &amp; Safeguarding</a> · Nigeria</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/sanity-config.js"></script>
+<script src="js/cms.js"></script>
+</body>
+</html>

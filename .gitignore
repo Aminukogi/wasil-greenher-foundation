@@ -1,0 +1,18 @@
+# Dependencies / build output
+node_modules/
+studio/node_modules/
+studio/dist/
+dist/
+.sanity/
+
+# OS / editor cruft
+Thumbs.db
+.DS_Store
+*.log
+
+# Original camera uploads — the site uses the renamed versions in images/
+images/FB_IMG_*.jpg
+images/LOGO.jpg
+
+# Local notes helper (not needed on the live site)
+images/PUT-YOUR-PHOTOS-HERE.txt

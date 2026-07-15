@@ -1,0 +1,11 @@
+# Netlify configuration for the Wasil GreenHer Foundation website.
+# It's a plain static site (no build step) served from the project root.
+[build]
+  publish = "."
+
+# Nice-to-have security headers.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

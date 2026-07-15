@@ -1,0 +1,18 @@
+{
+  "name": "wasil-greenher-studio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Sanity Studio (content backend) for the Wasil GreenHer Foundation website",
+  "scripts": {
+    "dev": "sanity dev",
+    "build": "sanity build",
+    "deploy": "sanity deploy"
+  },
+  "dependencies": {
+    "sanity": "^4",
+    "@sanity/vision": "^4",
+    "react": "^19",
+    "react-dom": "^19",
+    "styled-components": "^6"
+  }
+}
