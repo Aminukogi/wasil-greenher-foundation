@@ -21,6 +21,7 @@ const structure = (S) =>
       S.divider(),
       S.documentTypeListItem('teamMember').title('Team Members'),
       S.documentTypeListItem('heroSlide').title('Hero Slides'),
+      S.documentTypeListItem('programme').title('Programmes'),
       S.documentTypeListItem('post').title('Insight (news & stories)'),
       S.documentTypeListItem('galleryItem').title('Gallery'),
       S.documentTypeListItem('event').title('Events'),
