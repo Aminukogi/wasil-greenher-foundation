@@ -16,6 +16,16 @@ export default {
       type: 'image',
       description: 'Leave empty if this item is a video.',
       options: {hotspot: true},
+      fields: [
+        {
+          name: 'alt',
+          title: 'Describe the photo',
+          type: 'string',
+          description:
+            'Read aloud to visitors using a screen reader. Optional — the caption is used if you leave this empty, ' +
+            'but a fuller description is kinder.',
+        },
+      ],
     },
     {
       name: 'video',

@@ -34,6 +34,62 @@
     return d.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
   }
 
+  // ---------- Contact details & social links (footer of every page) ----------
+  // "0907 297 0381" -> "+2349072970381" so the number stays readable on the
+  // page while the tap-to-call link still works from any country.
+  function telHref(phone) {
+    var digits = String(phone || "").replace(/[^\d+]/g, "");
+    if (!digits) return "";
+    if (digits.charAt(0) === "+") return digits;
+    if (digits.charAt(0) === "0") return "+234" + digits.slice(1);
+    return digits;
+  }
+
+  var SOCIAL_GLYPHS = [
+    {key: "facebook", label: "Facebook", glyph: "f"},
+    {key: "instagram", label: "Instagram", glyph: "◎"},
+    {key: "x", label: "X (Twitter)", glyph: "𝕏"},
+    {key: "linkedin", label: "LinkedIn", glyph: "in"},
+    {key: "youtube", label: "YouTube", glyph: "▶"},
+    {key: "tiktok", label: "TikTok", glyph: "♪"}
+  ];
+
+  query('*[_type == "contactInfo"][0]{email, phone, officeLocation, facebook, instagram, x, linkedin, youtube, tiktok}')
+    .then(function (c) {
+      if (!c) return; // no document yet — keep whatever is in the HTML
+
+      var mail = c.email ? '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>" : "";
+      var tel = c.phone ? '<a href="tel:' + esc(telHref(c.phone)) + '">' + esc(c.phone) + "</a>" : "";
+
+      // Footer line: "Abuja (FCT), Nigeria · email · phone" — skip empty parts
+      // so we never render a stray separator.
+      var footerLine = [esc(c.officeLocation || ""), mail, tel].filter(Boolean).join(" · ");
+      if (footerLine) {
+        Array.prototype.forEach.call(document.querySelectorAll(".footer-contact"), function (el) {
+          el.innerHTML = footerLine;
+        });
+      }
+
+      // Contact page details.
+      var loc = document.getElementById("contact-location");
+      if (loc && c.officeLocation) loc.textContent = c.officeLocation;
+      var em = document.getElementById("contact-email");
+      if (em && mail) em.innerHTML = mail;
+      var ph = document.getElementById("contact-phone");
+      if (ph && tel) ph.innerHTML = tel;
+
+      // Social icons: only the ones with a link set. An icon that goes nowhere
+      // is worse than no icon, so the rest are dropped entirely.
+      var links = SOCIAL_GLYPHS.filter(function (s) { return c[s.key]; });
+      Array.prototype.forEach.call(document.querySelectorAll(".socials"), function (el) {
+        el.innerHTML = links.map(function (s) {
+          return '<a href="' + esc(c[s.key]) + '" aria-label="' + esc(s.label) +
+            '" target="_blank" rel="noopener">' + s.glyph + "</a>";
+        }).join("");
+        el.style.display = links.length ? "" : "none";
+      });
+    });
+
   // ---------- Homepage "Who We Are" photo (editable in Sanity) ----------
   var whoImg = document.getElementById("home-whoweare-img");
   if (whoImg) {
@@ -171,11 +227,18 @@
   }
 
   // ---------- Insight posts ----------
-  var postQuery = '*[_type == "post"] | order(publishedAt desc) {title, category, excerpt, publishedAt, "img": image.asset->url}';
+  // Undated stories sort below dated ones, then oldest-added first, which keeps
+  // the running order stable as the client adds posts.
+  var postQuery = '*[_type == "post"] | order(coalesce(publishedAt, "0000-01-01") desc, _createdAt asc)' +
+    '{title, category, excerpt, publishedAt, linkLabel, linkUrl, "img": image.asset->url, "alt": image.alt}';
 
   function postCard(p) {
     var thumb = p.img
-      ? '<div class="thumb"><img src="' + esc(p.img) + '?w=800&auto=format" alt="' + esc(p.title) + '"></div>'
+      ? '<div class="thumb"><img src="' + esc(p.img) + '?w=800&auto=format" alt="' +
+        esc(p.alt || p.title) + '"></div>'
+      : "";
+    var link = (p.linkLabel && p.linkUrl)
+      ? '<a class="more" href="' + esc(p.linkUrl) + '">' + esc(p.linkLabel) + " →</a>"
       : "";
     return '<article class="card post-card">' + thumb +
       '<div class="body">' +
@@ -183,6 +246,7 @@
       (p.publishedAt ? " · " + fmtDate(p.publishedAt) : "") + "</span>" +
       "<h3>" + esc(p.title) + "</h3>" +
       "<p>" + esc(p.excerpt) + "</p>" +
+      link +
       "</div></article>";
   }
 
@@ -203,38 +267,72 @@
   // ---------- Gallery ----------
   var galleryGrid = document.getElementById("gallery-grid");
   if (galleryGrid) {
-    query('*[_type == "galleryItem"] | order(_createdAt desc) {caption, "img": image.asset->url, "video": video.asset->url}')
+    query('*[_type == "galleryItem"] | order(_createdAt desc) {caption, "img": image.asset->url, "alt": image.alt, "video": video.asset->url}')
       .then(function (items) {
         if (!items.length) return;
         galleryGrid.innerHTML = items.map(function (it) {
           var media = it.video
             ? '<video src="' + esc(it.video) + '" controls muted playsinline style="width:100%;height:280px;object-fit:cover;"></video>'
-            : '<img src="' + esc(it.img) + '?w=900&auto=format" alt="' + esc(it.caption) + '">';
+            : '<img src="' + esc(it.img) + '?w=900&auto=format" alt="' + esc(it.alt || it.caption) + '">';
           return '<figure class="gallery-item">' + media +
             "<figcaption>" + esc(it.caption) + "</figcaption></figure>";
         }).join("");
       });
   }
 
+  // ---------- Donation amounts & bank details (Donate page) ----------
+  var tiersGrid = document.getElementById("donation-tiers");
+  if (tiersGrid) {
+    query('*[_type == "donationTier"] | order(order asc, _createdAt asc){amount, description}')
+      .then(function (tiers) {
+        if (!tiers.length) return;
+        tiersGrid.innerHTML = tiers.map(function (t) {
+          return '<div class="card center">' +
+            "<h3>" + esc(t.amount) + "</h3>" +
+            "<p>" + esc(t.description) + "</p>" +
+            "</div>";
+        }).join("");
+      });
+  }
+
+  var bank = document.getElementById("bank-details");
+  if (bank) {
+    query('*[_type == "donationSettings"][0]{accountName, bankName, accountNumber}')
+      .then(function (b) {
+        if (!b) return;
+        function row(name, value, pending) {
+          return "<li><span class=\"doc-name\">" + esc(name) + "</span>" +
+            '<span class="doc-status">' + esc(value || pending) + "</span></li>";
+        }
+        bank.innerHTML =
+          row("Account Name", b.accountName, "[Account name: to be added]") +
+          row("Bank", b.bankName, "[Bank name: to be added]") +
+          row("Account Number", b.accountNumber, "[Account number: to be added]");
+      });
+  }
+
   // ---------- Events ----------
   var eventsList = document.getElementById("events-list");
   if (eventsList) {
-    query('*[_type == "event"] | order(coalesce(date, "9999-12-31") asc) {title, category, location, timeInfo, date, description}')
+    // Undated ("TBA") events all tie on the date, so _createdAt breaks the tie
+    // and keeps their order stable between page loads.
+    query('*[_type == "event"] | order(coalesce(date, "9999-12-31") asc, _createdAt asc) {title, category, location, timeInfo, date, description, accent}')
       .then(function (events) {
         if (!events.length) return;
         eventsList.innerHTML = events.map(function (ev) {
           var d = ev.date ? new Date(ev.date) : null;
           var day = d ? d.getDate() : "–";
           var month = d ? d.toLocaleDateString("en-GB", { month: "short" }) : "TBA";
+          var badge = ev.accent === "purple" ? "badge" : "badge green";
           return '<div class="card event-card">' +
             '<div class="event-date"><div class="day">' + day + '</div><div class="month">' + esc(month) + "</div></div>" +
             "<div>" +
-            '<span class="badge green">' + esc(ev.category || "Event") + "</span>" +
+            '<span class="' + badge + '">' + esc(ev.category || "Event") + "</span>" +
             "<h3>" + esc(ev.title) + "</h3>" +
             '<p class="event-meta">📍 ' + esc(ev.location || "To be announced") +
             " · 🕘 " + esc(ev.timeInfo || (d ? fmtDate(ev.date) : "Date to be announced")) + "</p>" +
             "<p>" + esc(ev.description) + "</p>" +
-            '<a class="btn btn-outline" href="#register" style="margin-top:14px;">Register</a>' +
+            '<a class="btn btn-outline" href="#register" style="margin-top:14px;">Register Interest</a>' +
             "</div></div>";
         }).join("");
 

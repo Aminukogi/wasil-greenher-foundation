@@ -38,12 +38,35 @@ export default {
       title: 'Photo',
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        {
+          name: 'alt',
+          title: 'Describe the photo',
+          type: 'string',
+          description: 'Read aloud to visitors using a screen reader, and shown if the photo fails to load.',
+        },
+      ],
     },
     {
       name: 'publishedAt',
       title: 'Date',
       type: 'date',
+      description: 'Optional. Leave empty and no date is shown. Dated stories appear above undated ones.',
       initialValue: () => new Date().toISOString().slice(0, 10),
+    },
+    {
+      name: 'linkLabel',
+      title: 'Link text (optional)',
+      type: 'string',
+      description: 'The link at the bottom of the card, e.g. "Explore our climate work". An arrow is added automatically. Leave empty for no link.',
+    },
+    {
+      name: 'linkUrl',
+      title: 'Link goes to (optional)',
+      type: 'string',
+      description:
+        'A page on this website — contact.html, programmes.html, donate.html, volunteer.html, gallery.html, events.html — ' +
+        'or a specific programme like programmes.html#climate-action. A full web address (https://…) also works.',
     },
   ],
   orderings: [

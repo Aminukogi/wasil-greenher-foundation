@@ -8,8 +8,11 @@ import {schemaTypes} from './schemas'
 const projectId = '50kkp3hz'
 const dataset = 'production'
 
-// Friendly sidebar: "Homepage & Site Images" is a single editable page (singleton),
-// the rest are normal lists you add items to.
+// There is only ever one of each of these — they are pages, not lists.
+const singletons = ['siteSettings', 'contactInfo', 'donationSettings']
+
+// Friendly sidebar: single editable pages at the top, then the lists you add
+// items to, grouped the way the website is laid out.
 const structure = (S) =>
   S.list()
     .title('Content')
@@ -18,13 +21,24 @@ const structure = (S) =>
         .title('Homepage & Site Images')
         .id('siteSettings')
         .child(S.document().schemaType('siteSettings').documentId('siteSettings')),
+      S.listItem()
+        .title('Contact & Social Links')
+        .id('contactInfo')
+        .child(S.document().schemaType('contactInfo').documentId('contactInfo')),
       S.divider(),
-      S.documentTypeListItem('teamMember').title('Team Members'),
-      S.documentTypeListItem('heroSlide').title('Hero Slides'),
       S.documentTypeListItem('programme').title('Programmes'),
       S.documentTypeListItem('post').title('Insight (news & stories)'),
       S.documentTypeListItem('galleryItem').title('Gallery'),
       S.documentTypeListItem('event').title('Events'),
+      S.divider(),
+      S.documentTypeListItem('teamMember').title('Team Members'),
+      S.documentTypeListItem('heroSlide').title('Hero Slides'),
+      S.divider(),
+      S.documentTypeListItem('donationTier').title('Donation Amounts'),
+      S.listItem()
+        .title('Bank / Donation Details')
+        .id('donationSettings')
+        .child(S.document().schemaType('donationSettings').documentId('donationSettings')),
     ])
 
 export default defineConfig({
@@ -35,7 +49,7 @@ export default defineConfig({
   plugins: [structureTool({structure}), visionTool()],
   schema: {
     types: schemaTypes,
-    // Hide the singleton from the global "create new" menu.
-    templates: (templates) => templates.filter((t) => t.schemaType !== 'siteSettings'),
+    // Hide the singletons from the global "create new" menu.
+    templates: (templates) => templates.filter((t) => !singletons.includes(t.schemaType)),
   },
 })

@@ -42,6 +42,21 @@ export default {
       rows: 4,
       validation: (rule) => rule.required(),
     },
+    {
+      name: 'accent',
+      title: 'Badge colour',
+      type: 'string',
+      description: 'The colour of the small type label above the event name.',
+      options: {
+        list: [
+          {title: 'Green', value: 'green'},
+          {title: 'Purple', value: 'purple'},
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'green',
+    },
   ],
   preview: {
     select: {title: 'title', subtitle: 'location'},
